@@ -15,7 +15,7 @@ Vagrant.configure(2) do |config|
     subconfig.vm.hostname = "ansible"
     # настройки сети
     subconfig.vm.network "private_network", ip: "192.168.11.150"
-    # установка пакетов
+    # shell
     subconfig.vm.provision "shell", inline: <<-SHELL
       mkdir -p ~root/.ssh; cp ~vagrant/.ssh/auth* ~root/.ssh
       sed -i '65s/PasswordAuthentication no/PasswordAuthentication yes/g' /etc/ssh/sshd_config
