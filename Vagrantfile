@@ -26,8 +26,13 @@ Vagrant.configure(2) do |config|
     subconfig.vm.provision "file", source: "files/ansible.cfg", destination: "$HOME/ansible.cfg"
     subconfig.vm.provision "file", source: "files/epel.yml", destination: "$HOME/epel.yml"
     subconfig.vm.provision "file", source: "files/nginx.yml", destination: "$HOME/nginx.yml"
-    subconfig.vm.provision "file", source: "files/nginx.conf.j2", destination: "$HOME/nginx.conf.j2"
-  end
+    subconfig.vm.provision "file", source: "files/nginx.conf.j2", destination: "$HOME/nginx.conf.j2"  
+    
+    subconfig.vm.provision "ansible" do |ansible|
+      ansible.playbook = "files/nginx.yml"
+    end
+    
+  end  
 
   # ВТОРАЯ ВИРТУАЛЬНАЯ МАШИНА
   config.vm.define "client" do |subconfig|
